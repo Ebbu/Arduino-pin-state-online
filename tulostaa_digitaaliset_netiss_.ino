@@ -23,15 +23,13 @@ void loop() {
   EthernetClient client = server.available();   // kuunnellaan tulevia asiakkaita
   if (client) {
     Serial.println("new client");
-    // an http request ends with a blank line
+	//http requesti loppuu tyhjään riviin"
     boolean currentLineIsBlank = true;
     while (client.connected()) {
       if (client.available()) {
         char c = client.read();
         Serial.write(c);
-        // if you've gotten to the end of the line (received a newline
-        // character) and the line is blank, the http request has ended,
-        // so you can send a reply
+		//Rivin lopussa newline, jotta http requesti päättyy, jolloin client voi lähettää vastauksen.
         if (c == '\n' && currentLineIsBlank) {
           
           // kirjottelee perus html-sivun rivi riviltä 
